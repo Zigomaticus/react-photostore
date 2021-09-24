@@ -1,6 +1,13 @@
 import Card from "../components/Card";
 
-function Home({searchValue, setSearchValue, onChangeSearchInput, items, onAddToCard, onAddToFavorite}) {
+function Home({
+  searchValue,
+  setSearchValue,
+  onChangeSearchInput,
+  items,
+  onAddToCard,
+  onAddToFavorite,
+}) {
   return (
     <div className="content">
       <div className="search">
@@ -30,14 +37,14 @@ function Home({searchValue, setSearchValue, onChangeSearchInput, items, onAddToC
       </div>
       <div className="photocamers">
         {items
-          //.filter((item) => item.title.toLowerCase().includes(searchValue))
+          .filter((item) => item.title.toLowerCase().includes(searchValue))
           .map((item) => (
             <Card
               key={item.id}
               {...item}
               onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCard(obj)}
-              favirited={true}
+              //added={isItemAdded(item.id)}
             />
           ))}
       </div>

@@ -1,6 +1,33 @@
 import React from "react";
+import Info from "./info";
+import { AppContext } from "../App";
+import axios from "axios";
 
 function Drawer({ onClose, onRemove, items = [] }) {
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
+  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const price = cartItems.reduce(
+    (sum, obj) => Number(obj.price) + Number(sum),
+    0
+  );
+  const discount = Math.round((price / 100) * 5);
+  const totalPrice = price - discount;
+
+  const onClickOrder = async () => {
+    try {
+      const { data } = await axios.post(
+        "https://613f7bf2e9d92a0017e17739.mockapi.io/orders",
+        { items: cartItems }
+      );
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+    } catch (error) {
+      alert("Не удалось создать заказ");
+    }
+  };
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -20,7 +47,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
           <React.Fragment>
             <div className="items">
               {items.map((obj) => (
-                <div className="cartItem">
+                <div key={obj.id} className="cartItem">
                   <img
                     className="cartItemPhoto"
                     width="70"
@@ -45,36 +72,36 @@ function Drawer({ onClose, onRemove, items = [] }) {
             </div>
             <ul className="cartTotal">
               <li className="cartTotalBlock">
-                <span>Итого:</span>
+                <span>Сумма:</span>
                 <div></div>
-                <b>432 942 руб.</b>
+                <b>{price} руб.</b>
               </li>
               <li className="cartTotalBlock">
-                <span>Налог 5%:</span>
+                <span>Скидка 5%:</span>
                 <div></div>
-                <b>20 186 руб.</b>
+                <b>{discount} руб.</b>
               </li>
-              <button className="greenButton">
+              <li className="cartTotalBlock">
+                <span>Итого:</span>
+                <div></div>
+                <b>{totalPrice} руб.</b>
+              </li>
+              <button onClick={onClickOrder} className="greenButton">
                 Оформить заказ
                 <img src="/img/svg/arrow.svg" alt="arrow" />
               </button>
             </ul>
           </React.Fragment>
         ) : (
-          <div className="cartEmpty">
-            <img
-              width={120}
-              height={120}
-              src="/img/cartEmpty.png"
-              alt="cart empty"
-            />
-            <h2>Корзина пустая</h2>
-            <p>Добавте хотя бы один фотоапарат, чтобы сделать заказ</p>
-            <button onClick={onClose} className="greenButton">
-              <img src="/img/svg/arrow.svg" alt="arrow" />
-              Вернуться назад
-            </button>
-          </div>
+          <Info
+            title={isOrderComplete ? "Заказ оформлен" : "Корзина пустая"}
+            discription={
+              isOrderComplete
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : "Добавте хотя бы один фотоапарат, чтобы сделать заказ"
+            }
+            image={isOrderComplete ? "/img/order.jpg" : "/img/cartEmpty.png"}
+          />
         )}
       </div>
     </div>

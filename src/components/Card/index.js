@@ -1,28 +1,36 @@
-import React from 'react'
+import React from "react";
 import styles from "./Card.module.scss";
+import { AppContext } from "../../App";
 
-function Card({ id, title, price, imageUrl, onFavorite, onPlus, favirited = false}) {
-  const [isAdded, setIsAdded] = React.useState(false)
-  const [isFavorite, setIsFavorite] = React.useState(favirited)
+function Card({
+  id,
+  title,
+  price,
+  imageUrl,
+  onFavorite,
+  onPlus,
+  favorited = false,
+}) {
+  const { isItemAdded } = React.useContext(AppContext);
+  const [isFavorite, setIsFavorite] = React.useState(favorited);
 
   const onClickFavorite = () => {
-    onFavorite({id, title, price, imageUrl})
-    setIsFavorite(!isFavorite)
-  }
+    onFavorite({ id, title, price, imageUrl });
+    setIsFavorite(!isFavorite);
+  };
 
   const onClickPlus = () => {
-    onPlus({id, title, price, imageUrl})
-    setIsAdded(!isAdded)
-  }
+    onPlus({ id, title, price, imageUrl });
+  };
 
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
-        <img
+        {onFavorite && <img
           onClick={onClickFavorite}
-          src={isFavorite ? "/img/svg/heartWhite.svg" : "/img/svg/heartRed.svg"}
+          src={isFavorite ? "/img/svg/heartRed.svg" : "/img/svg/heartWhite.svg"}
           alt="white heart"
-        />
+        />}
       </div>
       <img width={133} height={112} src={imageUrl} alt="Nikon D500" />
       <h5>{title}</h5>
@@ -32,11 +40,13 @@ function Card({ id, title, price, imageUrl, onFavorite, onPlus, favirited = fals
           <b>{price} руб.</b>
         </div>
         <button>
-          <img
+          {onPlus && <img
             onClick={onClickPlus}
-            src={isAdded ? "/img/svg/plus-checked.svg" :  "/img/svg/plus.svg"} 
+            src={
+              isItemAdded(id) ? "/img/svg/plus-checked.svg" : "/img/svg/plus.svg"
+            }
             alt="plus"
-          />
+          />}
         </button>
       </div>
     </div>

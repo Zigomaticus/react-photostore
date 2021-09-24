@@ -1,26 +1,26 @@
-import Card from '../components/Card'
+import Card from "../components/Card";
+import { AppContext } from "../App";
+import React from "react";
 
-function Favorites({items, onAddToFavorite}) {
+function Favorites({ onAddToFavorite }) {
+  const { favorites } = React.useContext(AppContext);
+
   return (
     <div className="content">
       <div className="search">
-        <h1>My favorites</h1>
+        <h1>Мои фавориты</h1>
       </div>
       <div className="photocamers">
-        {items
-          .map((item) => (
-            <Card
-              key={item.id}
-              {...item}
-              onFavorite={(obj) => onAddToFavorite(obj)}
-              // onPlus={(obj) => onAddToCard(obj)}
-            />
-          ))}
+        {favorites.map((item) => (
+          <Card
+            key={item.id}
+            {...item}
+            onFavorite={(obj) => onAddToFavorite(obj)}
+          />
+        ))}
       </div>
     </div>
   );
 }
-
-//(obj) => onAddToFavorite(obj)
 
 export default Favorites;
