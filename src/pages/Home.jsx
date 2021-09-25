@@ -44,7 +44,6 @@ function Home({
               {...item}
               onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCard(obj)}
-              //added={isItemAdded(item.id)}
             />
           ))}
       </div>
