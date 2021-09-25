@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/react-photostore/static/css/main.572d20ed.chunk.css",
-    "main.js": "/react-photostore/static/js/main.edada3ae.chunk.js",
-    "main.js.map": "/react-photostore/static/js/main.edada3ae.chunk.js.map",
+    "main.js": "/react-photostore/static/js/main.dd4f5f25.chunk.js",
+    "main.js.map": "/react-photostore/static/js/main.dd4f5f25.chunk.js.map",
     "runtime-main.js": "/react-photostore/static/js/runtime-main.49600a77.js",
     "runtime-main.js.map": "/react-photostore/static/js/runtime-main.49600a77.js.map",
-    "static/js/2.2c38d6e3.chunk.js": "/react-photostore/static/js/2.2c38d6e3.chunk.js",
-    "static/js/2.2c38d6e3.chunk.js.map": "/react-photostore/static/js/2.2c38d6e3.chunk.js.map",
+    "static/js/2.0537ea58.chunk.js": "/react-photostore/static/js/2.0537ea58.chunk.js",
+    "static/js/2.0537ea58.chunk.js.map": "/react-photostore/static/js/2.0537ea58.chunk.js.map",
     "index.html": "/react-photostore/index.html",
     "static/css/main.572d20ed.chunk.css.map": "/react-photostore/static/css/main.572d20ed.chunk.css.map",
-    "static/js/2.2c38d6e3.chunk.js.LICENSE.txt": "/react-photostore/static/js/2.2c38d6e3.chunk.js.LICENSE.txt"
+    "static/js/2.0537ea58.chunk.js.LICENSE.txt": "/react-photostore/static/js/2.0537ea58.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.49600a77.js",
-    "static/js/2.2c38d6e3.chunk.js",
+    "static/js/2.0537ea58.chunk.js",
     "static/css/main.572d20ed.chunk.css",
-    "static/js/main.edada3ae.chunk.js"
+    "static/js/main.dd4f5f25.chunk.js"
   ]
 }
