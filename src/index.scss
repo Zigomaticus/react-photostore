@@ -159,8 +159,11 @@ body {
   z-index: 100;
 
   .drawer {
+    display: flex;
+    flex-direction: column;
+
     position: absolute;
-    width: 385px;
+    width: 420px;
     height: 100%;
     right: 0;
     background: #fff;
@@ -168,7 +171,113 @@ body {
     padding: 30px;
 
     h2 {
-      margin: 0;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        cursor: pointer;
+      }
     }
+
+    .products {
+      flex: 1;
+      overflow: auto;
+
+      .cartItem {
+        display: flex;
+        align-items: center;
+        border: 1px solid #f3f3f3;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 10px;
+        margin-top: 10px;
+
+        .itemJpg {
+          margin-right: 20px;
+        }
+
+        .discription {
+          margin-right: 20px;
+
+          p {
+            font-size: 16px;
+          }
+
+          b {
+            font-size: 14px;
+          }
+        }
+
+        .cancelItem {
+          opacity: 0.5;
+          transition: opacity 0.2s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .items {
+      margin-top: 40px;
+
+      li {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        div {
+          flex: 1;
+          height: 1px;
+          border-bottom: 1px dashed #dfdfdf;
+          position: relative;
+          top: -4px;
+          margin: 0 8px;
+        }
+      }
+
+      .greenButton {
+        position: relative;
+
+        &:hover {
+          img {
+            transform: translateX(5px);
+          }
+        }
+
+        img {
+          position: absolute;
+          right: 60px;
+          top: 22px;
+          transition: transform 0.15s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.greenButton {
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: lighten(#9dd558, 10%);
+  }
+
+  &:active {
+    background: darken(#9dd558, 10%);
   }
 }
