@@ -3,6 +3,12 @@ import React from "react";
 function App() {
   return (
     <div className="wrapper">
+      <div className="overlay">
+        <div className="drawer">
+          <h2>Корзина</h2>
+        </div>
+      </div>
+
       <header>
         <div className="headerLeft">
           <img width={40} height={40} src="/img/png/logo.png" alt="Logo" />
