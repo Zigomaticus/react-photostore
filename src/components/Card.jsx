@@ -1,6 +1,6 @@
 import React from "react";
 
-function Card() {
+function Card({props}) {
   return (
     <div className="card">
       <div className="favorite">
@@ -14,14 +14,14 @@ function Card() {
       <img
         width={133}
         height={112}
-        src="/img/photocamers/Canon R.jpg"
+        src={props.imageUrl}
         alt="Canon R"
       />
-      <h5>Беззеркальная фотокамера Canon R</h5>
+      <h5>{props.title}</h5>
       <div className="cardBottom">
         <div className="cardPrice">
           <span>Цена: </span>
-          <b>12 999 руб.</b>
+          <b>{props.price} руб.</b>
         </div>
         <button>
           <img width={11} height={11} src="/img/svg/plus.svg" alt="Plus" />

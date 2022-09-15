@@ -4,6 +4,49 @@ import Card from "./components/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 
+const arr = [
+  {
+    title: "Беззеркальная фотокамера Canon R",
+    price: 12999,
+    imageUrl: "/img/photocamers/Canon R.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Nikon Z7",
+    price: 12300,
+    imageUrl: "/img/photocamers/Nikon Z7.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Sony 7M3K",
+    price: 18000,
+    imageUrl: "/img/photocamers/Sony 7M3K.jpg",
+  },
+  {
+    title: "Зеркальная фотокамера Nikon D500",
+    price: 9600,
+    imageUrl: "/img/photocamers/Nikon D500.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Canon R6",
+    price: 14999,
+    imageUrl: "/img/photocamers/Canon R6.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Nikon Z5",
+    price: 9999,
+    imageUrl: "/img/photocamers/Nikon Z5.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Sony 6600M",
+    price: 8999,
+    imageUrl: "/img/photocamers/Sony 6600M.jpg",
+  },
+  {
+    title: "Беззеркальная фотокамера Nikon Zfc",
+    price: 11000,
+    imageUrl: "/img/photocamers/Nikon Zfc.jpg",
+  },
+];
+
 function App() {
   return (
     <div className="wrapper">
@@ -23,7 +66,9 @@ function App() {
           </div>
         </div>
         <div className="camers">
-          <Card />
+          {arr.map((props) => (
+            <Card props={props} />
+          ))}
         </div>
       </div>
     </div>
