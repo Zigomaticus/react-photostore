@@ -1,0 +1,34 @@
+import React from "react";
+
+function Card() {
+  return (
+    <div className="card">
+      <div className="favorite">
+        <img
+          width={31}
+          height={31}
+          src="/img/svg/heartWhite.svg"
+          alt="Not favorite"
+        />
+      </div>
+      <img
+        width={133}
+        height={112}
+        src="/img/photocamers/Canon R.jpg"
+        alt="Canon R"
+      />
+      <h5>Беззеркальная фотокамера Canon R</h5>
+      <div className="cardBottom">
+        <div className="cardPrice">
+          <span>Цена: </span>
+          <b>12 999 руб.</b>
+        </div>
+        <button>
+          <img width={11} height={11} src="/img/svg/plus.svg" alt="Plus" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Card;
