@@ -1,13 +1,15 @@
 import React from "react";
+// Css
+import styles from "./Drawer.module.scss";
 
 function Drawer() {
   return (
-    <div className="overlay">
-      <div className="drawer">
+    <div className={styles.overlay}>
+      <div className={styles.drawer}>
         <h2>
           Корзина
           <img
-            className="cancelItem"
+            className={styles.cancel}
             width={28}
             height={28}
             src="/img/svg/cancel.svg"
@@ -15,21 +17,21 @@ function Drawer() {
           />
         </h2>
 
-        <div className="products">
-          <div className="cartItem">
+        <div className={styles.products}>
+          <div className={styles.item}>
             <img
-              className="itemJpg"
+              className={styles.jpg}
               width={60}
               height={60}
               src="/img/photocamers/Canon R.jpg"
               alt="Canon R"
             />
-            <div className="discription">
+            <div className={styles.discription}>
               <p>Беззеркальная фотокамера Canon R</p>
               <b>12 999 руб.</b>
             </div>
             <img
-              className="cancelItem"
+              className={styles.cancel}
               width={28}
               height={28}
               src="/img/svg/cancel.svg"
@@ -38,11 +40,11 @@ function Drawer() {
           </div>
         </div>
 
-        <div className="items">
+        <div className={styles.items}>
           <ul>
             <li>
               <span>Итого:</span>
-              <div className="dashed"></div>
+              <div className={styles.dashed}></div>
               <b>21 461 р.</b>
             </li>
             <li>
@@ -51,7 +53,7 @@ function Drawer() {
               <b>1 168 р.</b>
             </li>
           </ul>
-          <button className="greenButton">
+          <button className={styles.button}>
             Оформить заказ <img src="/img/svg/arrow.svg" alt="Arrow" />
           </button>
         </div>

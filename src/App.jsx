@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // Components
 import Card from "./components/Card";
 import Drawer from "./components/Drawer";
@@ -67,7 +67,12 @@ function App() {
         </div>
         <div className="camers">
           {arr.map((props) => (
-            <Card key={props.title} props={props} />
+            <Card
+              key={props.title}
+              props={props}
+              onClickPlus={() => console.log("Add to liked")}
+              onClickFavorite={() => console.log("Add to favorite")}
+            />
           ))}
         </div>
       </div>
