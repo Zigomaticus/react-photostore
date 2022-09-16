@@ -67,7 +67,7 @@ function App() {
         </div>
         <div className="camers">
           {arr.map((props) => (
-            <Card props={props} />
+            <Card key={props.title} props={props} />
           ))}
         </div>
       </div>
