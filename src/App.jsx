@@ -1,54 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Components
 import Card from "./components/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 
-const arr = [
-  {
-    title: "Беззеркальная фотокамера Canon R",
-    price: 12999,
-    imageUrl: "/img/photocamers/Canon R.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Nikon Z7",
-    price: 12300,
-    imageUrl: "/img/photocamers/Nikon Z7.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Sony 7M3K",
-    price: 18000,
-    imageUrl: "/img/photocamers/Sony 7M3K.jpg",
-  },
-  {
-    title: "Зеркальная фотокамера Nikon D500",
-    price: 9600,
-    imageUrl: "/img/photocamers/Nikon D500.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Canon R6",
-    price: 14999,
-    imageUrl: "/img/photocamers/Canon R6.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Nikon Z5",
-    price: 9999,
-    imageUrl: "/img/photocamers/Nikon Z5.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Sony 6600M",
-    price: 8999,
-    imageUrl: "/img/photocamers/Sony 6600M.jpg",
-  },
-  {
-    title: "Беззеркальная фотокамера Nikon Zfc",
-    price: 11000,
-    imageUrl: "/img/photocamers/Nikon Zfc.jpg",
-  },
-];
+// const arr = [
+//   {
+//     title: "Беззеркальная фотокамера Canon R",
+//     price: 150999,
+//     imageUrl: "/img/photocamers/Canon R.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Nikon Z7",
+//     price: 167999,
+//     imageUrl: "/img/photocamers/Nikon Z7.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Sony 7M3K",
+//     price: 190000,
+//     imageUrl: "/img/photocamers/Sony 7M3K.jpg",
+//   },
+//   {
+//     title: "Зеркальная фотокамера Nikon D500",
+//     price: 124999,
+//     imageUrl: "/img/photocamers/Nikon D500.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Canon R6",
+//     price: 111999,
+//     imageUrl: "/img/photocamers/Canon R6.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Nikon Z5",
+//     price: 89999,
+//     imageUrl: "/img/photocamers/Nikon Z5.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Sony 6600M",
+//     price: 64999,
+//     imageUrl: "/img/photocamers/Sony 6600M.jpg",
+//   },
+//   {
+//     title: "Беззеркальная фотокамера Nikon Zfc",
+//     price: 99999,
+//     imageUrl: "/img/photocamers/Nikon Zfc.jpg",
+//   },
+// ];
 
 function App() {
+  const [items, setItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
+
+  useEffect(() => {
+    fetch("https://613f7bf2e9d92a0017e17739.mockapi.io/items")
+      .then((res) => res.json())
+      .then((json) => setItems(json));
+  }, []);
 
   return (
     <div className="wrapper">
@@ -68,7 +75,7 @@ function App() {
           </div>
         </div>
         <div className="camers">
-          {arr.map((props) => (
+          {items.map((props) => (
             <Card
               key={props.title}
               props={props}
