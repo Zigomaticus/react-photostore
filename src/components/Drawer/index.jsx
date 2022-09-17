@@ -2,13 +2,14 @@ import React from "react";
 // Css
 import styles from "./Drawer.module.scss";
 
-function Drawer() {
+function Drawer({ onClose }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
         <h2>
           Корзина
           <img
+            onClick={onClose}
             className={styles.cancel}
             width={28}
             height={28}

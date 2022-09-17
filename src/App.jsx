@@ -48,10 +48,12 @@ const arr = [
 ];
 
 function App() {
+  const [cartOpened, setCartOpened] = useState(false);
+
   return (
     <div className="wrapper">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      <Header onClickCard={() => setCartOpened(true)} />
       <div className="content">
         <div className="seachBlock">
           <h1>Все фотоаппараты</h1>

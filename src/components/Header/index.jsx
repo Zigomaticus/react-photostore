@@ -2,7 +2,7 @@ import React from "react";
 // Css
 import styles from "./Header.module.scss";
 
-function Header() {
+function Header({onClickCard}) {
   return (
     <header>
       <div className={styles.left}>
@@ -14,7 +14,7 @@ function Header() {
       </div>
       <div className={styles.right}>
         <ul>
-          <li>
+          <li className={styles.cart} onClick={onClickCard}>
             <img width={18} height={18} src="/img/svg/cart.svg" alt="Cart" />
             <span>1205 руб.</span>
           </li>

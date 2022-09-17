@@ -34,8 +34,12 @@ header {
       display: flex;
       gap: 30px;
 
-      span {
-        margin-left: 10px;
+      .cart {
+        cursor: pointer;
+
+        span {
+          margin-left: 10px;
+        }
       }
     }
   }
