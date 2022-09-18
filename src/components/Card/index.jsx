@@ -2,13 +2,13 @@ import React, { useState } from "react";
 // Css
 import styles from "./Card.module.scss";
 
-function Card({ props, onClickPlus, onClickFavorite }) {
-
-  const [isAdded, setIsAdded] = useState(false)
+function Card({ title, imageUrl, price, onClickPlus, onClickFavorite }) {
+  const [isAdded, setIsAdded] = useState(false);
 
   const handlePlus = () => {
-    setIsAdded(!isAdded)
-  }
+    onClickPlus({title, imageUrl, price});
+    setIsAdded(!isAdded);
+  };
 
   return (
     <div className={styles.card}>
@@ -21,12 +21,12 @@ function Card({ props, onClickPlus, onClickFavorite }) {
           alt="Not favorite"
         />
       </div>
-      <img width={133} height={112} src={props.imageUrl} alt="Photocamera" />
-      <h5>{props.title}</h5>
+      <img width={133} height={112} src={imageUrl} alt="Photocamera" />
+      <h5>{title}</h5>
       <div className={styles.bottom}>
         <div className={styles.price}>
           <span>Цена: </span>
-          <b>{props.price} руб.</b>
+          <b>{price} руб.</b>
         </div>
         <button>
           <img

@@ -49,6 +49,7 @@ import Header from "./components/Header";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
@@ -57,9 +58,19 @@ function App() {
       .then((json) => setItems(json));
   }, []);
 
+  const onAddToCard = (obj) => {
+    setCartItems((prev) => [...prev, obj]);
+  };
+
   return (
     <div className="wrapper">
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      {cartOpened && (
+        <Drawer
+          onClose={() => setCartOpened(false)}
+          items={items}
+          cartItems={cartItems}
+        />
+      )}
       <Header onClickCard={() => setCartOpened(true)} />
       <div className="content">
         <div className="seachBlock">
@@ -75,11 +86,13 @@ function App() {
           </div>
         </div>
         <div className="camers">
-          {items.map((props) => (
+          {items.map((item) => (
             <Card
-              key={props.title}
-              props={props}
-              onClickPlus={() => console.log("Add to liked")}
+              key={item.id}
+              title={item.title}
+              price={item.price}
+              imageUrl={item.imageUrl}
+              onClickPlus={(obj) => onAddToCard(obj)}
               onClickFavorite={() => console.log("Add to favorite")}
             />
           ))}

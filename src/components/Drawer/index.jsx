@@ -2,7 +2,7 @@ import React from "react";
 // Css
 import styles from "./Drawer.module.scss";
 
-function Drawer({ onClose }) {
+function Drawer({ onClose, cartItems }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -19,26 +19,28 @@ function Drawer({ onClose }) {
         </h2>
 
         <div className={styles.products}>
-          <div className={styles.item}>
-            <img
-              className={styles.jpg}
-              width={60}
-              height={60}
-              src="/img/photocamers/Canon R.jpg"
-              alt="Canon R"
-            />
-            <div className={styles.discription}>
-              <p>Беззеркальная фотокамера Canon R</p>
-              <b>12 999 руб.</b>
+          {cartItems.map((obj) => (
+            <div className={styles.item}>
+              <img
+                className={styles.jpg}
+                width={60}
+                height={60}
+                src={obj.imageUrl}
+                alt="Photocamera"
+              />
+              <div className={styles.discription}>
+                <p>{obj.title}</p>
+                <b>{obj.price} руб.</b>
+              </div>
+              <img
+                className={styles.cancel}
+                width={28}
+                height={28}
+                src="/img/svg/cancel.svg"
+                alt="Close"
+              />
             </div>
-            <img
-              className={styles.cancel}
-              width={28}
-              height={28}
-              src="/img/svg/cancel.svg"
-              alt="Close"
-            />
-          </div>
+          ))}
         </div>
 
         <div className={styles.items}>
