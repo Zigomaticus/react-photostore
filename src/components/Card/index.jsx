@@ -6,7 +6,7 @@ function Card({ title, imageUrl, price, onClickPlus, onClickFavorite }) {
   const [isAdded, setIsAdded] = useState(false);
 
   const handlePlus = () => {
-    onClickPlus({title, imageUrl, price});
+    onClickPlus({ title, imageUrl, price });
     setIsAdded(!isAdded);
   };
 

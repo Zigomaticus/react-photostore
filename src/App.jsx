@@ -50,6 +50,7 @@ import Header from "./components/Header";
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
@@ -59,22 +60,26 @@ function App() {
   }, []);
 
   const onAddToCard = (obj) => {
-    setCartItems((prev) => [...prev, obj]);
+    return setCartItems((prev) => [...prev, obj]);
+  };
+
+  const onChangeSearchInput = (e) => {
+    setSearchValue(e.target.value);
   };
 
   return (
     <div className="wrapper">
       {cartOpened && (
-        <Drawer
-          onClose={() => setCartOpened(false)}
-          items={items}
-          cartItems={cartItems}
-        />
+        <Drawer onClose={() => setCartOpened(false)} cartItems={cartItems} />
       )}
       <Header onClickCard={() => setCartOpened(true)} />
       <div className="content">
         <div className="seachBlock">
-          <h1>Все фотоаппараты</h1>
+          {searchValue ? (
+            `Поиск по: ${searchValue} `
+          ) : (
+            <h1>Все фотоаппараты</h1>
+          )}
           <div className="search">
             <img
               width={18}
@@ -82,20 +87,26 @@ function App() {
               src="/img/svg/search.svg"
               alt="Search"
             />
-            <input placeholder="Поиск..." />
+            <input
+              placeholder="Поиск..."
+              value={searchValue}
+              onChange={onChangeSearchInput}
+            />
           </div>
         </div>
         <div className="camers">
-          {items.map((item) => (
-            <Card
-              key={item.id}
-              title={item.title}
-              price={item.price}
-              imageUrl={item.imageUrl}
-              onClickPlus={(obj) => onAddToCard(obj)}
-              onClickFavorite={() => console.log("Add to favorite")}
-            />
-          ))}
+          {items
+            .filter((item) => item.title.toLowerCase().includes(searchValue))
+            .map((item) => (
+              <Card
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                onClickPlus={(obj) => onAddToCard(obj)}
+                onClickFavorite={() => console.log("Add to favorite")}
+              />
+            ))}
         </div>
       </div>
     </div>
