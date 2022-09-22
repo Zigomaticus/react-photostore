@@ -2,7 +2,7 @@ import React from "react";
 // Css
 import styles from "./Drawer.module.scss";
 
-function Drawer({ onClose, cartItems }) {
+function Drawer({ onClose, cartItems, onRemoveItem }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -33,6 +33,7 @@ function Drawer({ onClose, cartItems }) {
                 <b>{obj.price} руб.</b>
               </div>
               <img
+                onClick={() => onRemoveItem(obj.id)}
                 className={styles.cancel}
                 width={28}
                 height={28}
