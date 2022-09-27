@@ -51,6 +51,7 @@ import Header from "./components/Header";
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
 
@@ -78,8 +79,13 @@ function App() {
   };
 
   const onRemoveItem = (id) => {
-    // axios.delete(`https://613f7bf2e9d92a0017e17739.mockapi.io/cart/${id}`);
+    axios.delete(`https://613f7bf2e9d92a0017e17739.mockapi.io/cart/${id}`);
     return setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const onAddToFavorite = (obj) => {
+    axios.post("https://613f7bf2e9d92a0017e17739.mockapi.io/favorites", obj);
+    return setFavorites((prev) => [...prev, obj]);
   };
 
   return (
@@ -123,7 +129,7 @@ function App() {
                 price={item.price}
                 imageUrl={item.imageUrl}
                 onClickPlus={(obj) => onAddToCard(obj)}
-                onClickFavorite={() => console.log("Add to favorite")}
+                onFavorite={(obj) => onAddToFavorite(obj)}
               />
             ))}
         </div>

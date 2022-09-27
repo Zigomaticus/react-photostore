@@ -2,23 +2,29 @@ import React, { useState } from "react";
 // Css
 import styles from "./Card.module.scss";
 
-function Card({ title, imageUrl, price, onClickPlus, onClickFavorite }) {
+function Card({ title, imageUrl, price, onClickPlus, onFavorite }) {
   const [isAdded, setIsAdded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handlePlus = () => {
     onClickPlus({ title, imageUrl, price });
     setIsAdded(!isAdded);
   };
 
+  const handleFavorite = () => {
+    onFavorite({ title, imageUrl, price });
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
         <img
-          onClick={onClickFavorite}
+          onClick={handleFavorite}
           width={31}
           height={31}
-          src="/img/svg/heartWhite.svg"
-          alt="Not favorite"
+          src={isFavorite ? "/img/svg/heartRed.svg" : "/img/svg/heartWhite.svg"}
+          alt="Добавить в закладки"
         />
       </div>
       <img width={133} height={112} src={imageUrl} alt="Photocamera" />
@@ -28,13 +34,13 @@ function Card({ title, imageUrl, price, onClickPlus, onClickFavorite }) {
           <span>Цена: </span>
           <b>{price} руб.</b>
         </div>
-        <button>
+        <button className={styles.button}>
           <img
             onClick={handlePlus}
             width={32}
             height={32}
             src={isAdded ? "/img/svg/plusChecked.svg" : "/img/svg/plus.svg"}
-            alt="Plus"
+            alt="Добавить товар"
           />
         </button>
       </div>
