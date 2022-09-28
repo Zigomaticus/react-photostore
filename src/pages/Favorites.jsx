@@ -2,7 +2,7 @@ import React from "react";
 // Components
 import Card from "../components/Card";
 
-function Favorites({ favorites }) {
+function Favorites({ favorites, onAddToFavorite }) {
   return (
     <div className="content">
       <div className="seachBlock">
@@ -12,12 +12,9 @@ function Favorites({ favorites }) {
         {favorites.map((item) => (
           <Card
             key={item.id}
-            title={item.title}
-            price={item.price}
-            imageUrl={item.imageUrl}
             favorited={true}
-            // onClickPlus={(obj) => onAddToCard(obj)}
-            // onFavorite={(obj) => onAddToFavorite(obj)}
+            onFavorite={(obj) => onAddToFavorite(obj)}
+            {...item}
           />
         ))}
       </div>

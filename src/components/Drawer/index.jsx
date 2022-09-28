@@ -37,7 +37,7 @@ function Drawer({ onClose, cartItems, onRemoveItem }) {
           <>
             <div className={styles.products}>
               {cartItems.map((obj) => (
-                <div className={styles.item}>
+                <div key={obj.id} className={styles.item}>
                   <img
                     className={styles.jpg}
                     width={60}

@@ -2,17 +2,25 @@ import React, { useState } from "react";
 // Css
 import styles from "./Card.module.scss";
 
-function Card({ title, imageUrl, price, onClickPlus, onFavorite, favorited }) {
+function Card({
+  id,
+  title,
+  imageUrl,
+  price,
+  onClickPlus,
+  onFavorite,
+  favorited = false,
+}) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const handlePlus = () => {
-    onClickPlus({ title, imageUrl, price });
+    onClickPlus({ id, title, imageUrl, price });
     setIsAdded(!isAdded);
   };
 
   const handleFavorite = () => {
-    onFavorite({ title, imageUrl, price });
+    onFavorite({ id, title, imageUrl, price });
     setIsFavorite(!isFavorite);
   };
 
@@ -24,7 +32,7 @@ function Card({ title, imageUrl, price, onClickPlus, onFavorite, favorited }) {
           width={31}
           height={31}
           src={isFavorite ? "/img/svg/heartRed.svg" : "/img/svg/heartWhite.svg"}
-          alt="Добавить в закладки"
+          alt="Добавить в избранное"
         />
       </div>
       <img width={133} height={112} src={imageUrl} alt="Photocamera" />

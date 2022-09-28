@@ -77,8 +77,19 @@ function App() {
   }, []);
 
   const onAddToCard = (obj) => {
-    axios.post("https://613f7bf2e9d92a0017e17739.mockapi.io/cart", obj);
-    return setCartItems((prev) => [...prev, obj]);
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        axios.delete(`https://613f7bf2e9d92a0017e17739.mockapi.io/cart/${obj.id}`);
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
+      } else {
+        axios.post("https://613f7bf2e9d92a0017e17739.mockapi.io/cart", obj);
+        setCartItems((prev) => [...prev, obj]);
+      }
+    } catch (error) {
+      alert("Не удалось добавить товар в корзину!");
+    }
   };
 
   const onChangeSearchInput = (e) => {
@@ -90,9 +101,23 @@ function App() {
     return setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const onAddToFavorite = (obj) => {
-    axios.post("https://613f7bf2e9d92a0017e17739.mockapi.io/favorites", obj);
-    return setFavorites((prev) => [...prev, obj]);
+  const onAddToFavorite = async (obj) => {
+    try {
+      if (favorites.find((favObj) => favObj.id === favObj.id)) {
+        axios.delete(
+          `https://613f7bf2e9d92a0017e17739.mockapi.io/favorites/${obj.id}`
+        );
+        // setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
+      } else {
+        const { data } = await axios.post(
+          "https://613f7bf2e9d92a0017e17739.mockapi.io/favorites",
+          obj
+        );
+        setFavorites((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert("Не удалось добавить в избранное!");
+    }
   };
 
   return (
@@ -121,7 +146,12 @@ function App() {
         ></Route>
         <Route
           path="/favorites"
-          element={<Favorites favorites={favorites} />}
+          element={
+            <Favorites
+              favorites={favorites}
+              onAddToFavorite={onAddToFavorite}
+            />
+          }
         ></Route>
       </Routes>
     </div>
