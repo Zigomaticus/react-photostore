@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 // Components
-import Card from "./components/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
+import Home from "./pages/Home";
 
 // const arr = [
 //   {
@@ -98,42 +98,13 @@ function App() {
         />
       )}
       <Header onClickCard={() => setCartOpened(true)} />
-      <div className="content">
-        <div className="seachBlock">
-          {searchValue ? (
-            `Поиск по: ${searchValue} `
-          ) : (
-            <h1>Все фотоаппараты</h1>
-          )}
-          <div className="search">
-            <img
-              width={18}
-              height={18}
-              src="/img/svg/search.svg"
-              alt="Search"
-            />
-            <input
-              placeholder="Поиск..."
-              value={searchValue}
-              onChange={onChangeSearchInput}
-            />
-          </div>
-        </div>
-        <div className="camers">
-          {items
-            .filter((item) => item.title.toLowerCase().includes(searchValue))
-            .map((item) => (
-              <Card
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                imageUrl={item.imageUrl}
-                onClickPlus={(obj) => onAddToCard(obj)}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-              />
-            ))}
-        </div>
-      </div>
+      <Home
+        items={items}
+        searchValue={searchValue}
+        onChangeSearchInput={onChangeSearchInput}
+        onAddToCard={onAddToCard}
+        onAddToFavorite={onAddToFavorite}
+      />
     </div>
   );
 }
