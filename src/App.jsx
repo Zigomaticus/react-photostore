@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Routes, Route } from "react-router-dom";
 // Components
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 // const arr = [
 //   {
@@ -67,6 +69,11 @@ function App() {
       .then((res) => {
         setCartItems(res.data);
       });
+    axios
+      .get("https://613f7bf2e9d92a0017e17739.mockapi.io/favorites")
+      .then((res) => {
+        setFavorites(res.data);
+      });
   }, []);
 
   const onAddToCard = (obj) => {
@@ -98,13 +105,25 @@ function App() {
         />
       )}
       <Header onClickCard={() => setCartOpened(true)} />
-      <Home
-        items={items}
-        searchValue={searchValue}
-        onChangeSearchInput={onChangeSearchInput}
-        onAddToCard={onAddToCard}
-        onAddToFavorite={onAddToFavorite}
-      />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToCard={onAddToCard}
+              onAddToFavorite={onAddToFavorite}
+            />
+          }
+        ></Route>
+        <Route
+          path="/favorites"
+          element={<Favorites favorites={favorites} />}
+        ></Route>
+      </Routes>
     </div>
   );
 }
