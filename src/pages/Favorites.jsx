@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../App";
 // Components
 import Card from "../components/Card";
 
-function Favorites({ favorites, onAddToFavorite }) {
+function Favorites({ onAddToFavorite }) {
+  const { favorites } = useContext(AppContext);
+
   return (
     <div className="content">
       <div className="seachBlock">
