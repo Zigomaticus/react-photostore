@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 function Home({
   items,
+  cartItems,
   searchValue,
   onChangeSearchInput,
   onAddToCard,
@@ -30,6 +31,9 @@ function Home({
               key={item.id}
               onClickPlus={(obj) => onAddToCard(obj)}
               onFavorite={(obj) => onAddToFavorite(obj)}
+              added={cartItems.some(
+                (obj) => Number(obj.id) === Number(item.id)
+              )}
               {...item}
             />
           ))}

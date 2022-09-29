@@ -58,28 +58,30 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("https://613f7bf2e9d92a0017e17739.mockapi.io/items")
-      .then((res) => {
-        setItems(res.data);
-      });
+    async function fetchData() {
+      const cartResponse = await axios.get(
+        "https://613f7bf2e9d92a0017e17739.mockapi.io/cart"
+      );
+      const favoritesResponse = await axios.get(
+        "https://613f7bf2e9d92a0017e17739.mockapi.io/favorites"
+      );
+      const itemsResponse = await axios.get(
+        "https://613f7bf2e9d92a0017e17739.mockapi.io/items"
+      );
 
-    axios
-      .get("https://613f7bf2e9d92a0017e17739.mockapi.io/cart")
-      .then((res) => {
-        setCartItems(res.data);
-      });
-    axios
-      .get("https://613f7bf2e9d92a0017e17739.mockapi.io/favorites")
-      .then((res) => {
-        setFavorites(res.data);
-      });
+      setCartItems(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setItems(itemsResponse.data);
+    }
+    fetchData();
   }, []);
 
   const onAddToCard = (obj) => {
     try {
       if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-        axios.delete(`https://613f7bf2e9d92a0017e17739.mockapi.io/cart/${obj.id}`);
+        axios.delete(
+          `https://613f7bf2e9d92a0017e17739.mockapi.io/cart/${obj.id}`
+        );
         setCartItems((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
@@ -103,7 +105,7 @@ function App() {
 
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorites.find((favObj) => favObj.id === favObj.id)) {
+      if (favorites.find((favObj) => favObj.id === obj.id)) {
         axios.delete(
           `https://613f7bf2e9d92a0017e17739.mockapi.io/favorites/${obj.id}`
         );
@@ -137,6 +139,7 @@ function App() {
           element={
             <Home
               items={items}
+              cartItems={cartItems}
               searchValue={searchValue}
               onChangeSearchInput={onChangeSearchInput}
               onAddToCard={onAddToCard}
