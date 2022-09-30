@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+// Components
+import Info from "../Info";
 // Css
 import styles from "./Drawer.module.scss";
 
-function Drawer({ onClose, cartItems, onRemoveItem }) {
+function Drawer({ onClose, cartItems, onRemoveItem, setCartItems }) {
+  const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+  const [orderId, setOrderId] = useState(null);
+
+  const onCLickOrder = async () => {
+    try {
+      const { data } = await axios.post(
+        `https://613f7bf2e9d92a0017e17739.mockapi.io/orders`,
+        cartItems
+      );
+      setOrderId(data.id);
+      setIsOrderCompleted(true);
+      setCartItems([]);
+      axios.delete("https://613f7bf2e9d92a0017e17739.mockapi.io/cart");
+    } catch (error) {
+      alert("Не удалось создать заказ!");
+    }
+  };
+
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -19,20 +40,18 @@ function Drawer({ onClose, cartItems, onRemoveItem }) {
         </h2>
 
         {cartItems.length === 0 ? (
-          <div className={styles.cartEmpty}>
-            <img
-              width={120}
-              height={120}
-              src="/img/png/cartEmpty.png"
-              alt="CartEmpty"
-            />
-            <h2>Корзина пуста</h2>
-            <p>Добавьте хотя бы одну пару кроссовок чтобы сделать заказ</p>
-            <button onClick={onClose}>
-              <img src="/img/svg/arrow.svg" alt="Arrow" />
-              Вернуться назад
-            </button>
-          </div>
+          <Info
+            onClose={onClose}
+            title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
+            description={
+              isOrderCompleted
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской службе`
+                : "Добавьте хотя бы одну пару кроссовок чтобы сделать заказ"
+            }
+            image={
+              isOrderCompleted ? "/img/png/order.jpg" : "/img/png/cartEmpty.png"
+            }
+          />
         ) : (
           <>
             <div className={styles.products}>
@@ -74,7 +93,7 @@ function Drawer({ onClose, cartItems, onRemoveItem }) {
                   <b>1 168 р.</b>
                 </li>
               </ul>
-              <button>
+              <button onClick={onCLickOrder}>
                 Оформить заказ <img src="/img/svg/arrow.svg" alt="Arrow" />
               </button>
             </div>

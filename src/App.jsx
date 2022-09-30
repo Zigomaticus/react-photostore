@@ -141,6 +141,7 @@ function App() {
             onClose={() => setCartOpened(false)}
             cartItems={cartItems}
             onRemoveItem={onRemoveItem}
+            setCartItems={setCartItems}
           />
         )}
         <Header onClickCard={() => setCartOpened(true)} />
