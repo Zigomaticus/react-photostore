@@ -25,6 +25,8 @@ function Drawer({ onClose, cartItems, onRemoveItem, setCartItems }) {
   };
 
   return (
+
+    
     <div className={styles.overlay}>
       <div className={styles.drawer}>
         <h2>
