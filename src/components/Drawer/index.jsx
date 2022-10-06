@@ -9,6 +9,8 @@ function Drawer({ onClose, cartItems, onRemoveItem, setCartItems }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [orderId, setOrderId] = useState(null);
 
+  const totalPrice = cartItems.reduce((sum, obj) => +obj.price + +sum, 0);
+
   const onCLickOrder = async () => {
     try {
       const { data } = await axios.post(
@@ -25,8 +27,6 @@ function Drawer({ onClose, cartItems, onRemoveItem, setCartItems }) {
   };
 
   return (
-
-    
     <div className={styles.overlay}>
       <div className={styles.drawer}>
         <h2>
@@ -87,12 +87,12 @@ function Drawer({ onClose, cartItems, onRemoveItem, setCartItems }) {
                 <li>
                   <span>Итого:</span>
                   <div className={styles.dashed}></div>
-                  <b>21 461 р.</b>
+                  <b>{totalPrice} р.</b>
                 </li>
                 <li>
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>1 168 р.</b>
+                  <b>{Math.round(totalPrice * 0.05)} р.</b>
                 </li>
               </ul>
               <button onClick={onCLickOrder}>

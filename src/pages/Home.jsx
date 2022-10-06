@@ -8,9 +8,7 @@ function Home({
   onChangeSearchInput,
   onAddToCard,
   onAddToFavorite,
-  isLoading,
 }) {
-
   return (
     <div className="content">
       <div className="seachBlock">
@@ -25,22 +23,6 @@ function Home({
         </div>
       </div>
       <div className="camers">
-        {/* {isLoading
-          ? Array(8).fill(<Card loading={isLoading} />)
-          : items
-              .filter((item) => item.title.toLowerCase().includes(searchValue))
-              .map((item) => (
-                <Card
-                  key={item.id}
-                  onClickPlus={(obj) => onAddToCard(obj)}
-                  onFavorite={(obj) => onAddToFavorite(obj)}
-                  added={cartItems.some(
-                    (obj) => Number(obj.id) === Number(item.id)
-                  )}
-                  loading={isLoading}
-                  {...item}
-                />
-              ))} */}
         {items
           .filter((item) => item.title.toLowerCase().includes(searchValue))
           .map((item) => (
@@ -48,7 +30,6 @@ function Home({
               key={item.id}
               onClickPlus={(obj) => onAddToCard(obj)}
               onFavorite={(obj) => onAddToFavorite(obj)}
-              loading={isLoading}
               {...item}
             />
           ))}

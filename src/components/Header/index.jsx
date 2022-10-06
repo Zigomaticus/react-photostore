@@ -37,14 +37,16 @@ function Header({ onClickCard }) {
               />
             </Link>
           </li>
-          <li>
-            <img
-              width={18}
-              height={18}
-              src="/img/svg/user.svg"
-              alt="Пользователь"
-            />
-          </li>
+          <Link to="/orders">
+            <li>
+              <img
+                width={18}
+                height={18}
+                src="/img/svg/user.svg"
+                alt="Пользователь"
+              />
+            </li>
+          </Link>
         </ul>
       </div>
     </header>
