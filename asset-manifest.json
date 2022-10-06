@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-photostore/static/css/main.0109e9cb.css",
-    "main.js": "/react-photostore/static/js/main.f0125ade.js",
+    "main.js": "/react-photostore/static/js/main.0525c041.js",
     "index.html": "/react-photostore/index.html",
     "main.0109e9cb.css.map": "/react-photostore/static/css/main.0109e9cb.css.map",
-    "main.f0125ade.js.map": "/react-photostore/static/js/main.f0125ade.js.map"
+    "main.0525c041.js.map": "/react-photostore/static/js/main.0525c041.js.map"
   },
   "entrypoints": [
     "static/css/main.0109e9cb.css",
-    "static/js/main.f0125ade.js"
+    "static/js/main.0525c041.js"
   ]
 }
